@@ -12,16 +12,16 @@
         class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top-[66]"
         v-if="weatherSearchResults"
       >
-        <!-- <li
+        <li
           v-for="searchResult in weatherSearchResults"
           :key="searchResult.id"
           class="py-2 cursor-pointer"
         >
-          {{ searchResult.name }}
-        </li> -->
-        <li v-if="weatherSearchResults" class="py-2 cursor-pointer">
-          {{ weatherSearchResults.name }}
+          {{ searchResult.place_name }}
         </li>
+        <!-- <li v-if="weatherSearchResults" class="py-2 cursor-pointer">
+          {{ weatherSearchResults.name }}
+        </li> -->
       </ul>
     </div>
   </main>
@@ -31,7 +31,9 @@
 import { ref } from "vue";
 import axios from "axios";
 
-const openWeatherAPIKey = "test123456"; //todo: import legit Key from .env file
+//todo: import legit Key from .env file
+const openWeatherAPIKey = "test123456";
+const mapboxAPIKey = "test0987";
 
 const searchQuery = ref("");
 const queryTimeout = ref(null);
@@ -49,22 +51,25 @@ const getSearchResults = () => {
     //open weather geocode api for latitude and longitude
 
     if (searchQuery.value !== "") {
-      const geoCodeAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=${limit}&appid=${openWeatherAPIKey}`;
-      const response = await axios.get(geoCodeAPI);
+      // const geoCodeAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=${limit}&appid=${openWeatherAPIKey}`;
+      // const response = await axios.get(geoCodeAPI);
 
-      const result = response.data[0];
-      const lat = result.lat;
-      const lon = result.lon;
+      // const result = response.data[0];
+      // const lat = result.lat;
+      // const lon = result.lon;
 
-      const countryAPI = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${openWeatherAPIKey}`;
-      const citiesAPI = `https://api.openweathermap.org/data/2.5/find?q=${searchQuery.value}&type=like&sort=population&cnt=30&appid=${openWeatherAPIKey}`;
+      // const countryAPI = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${openWeatherAPIKey}`;
+      // const citiesAPI = `https://api.openweathermap.org/data/2.5/find?q=${searchQuery.value}&type=like&sort=population&cnt=30&appid=${openWeatherAPIKey}`;
 
-      //city current weather data
-      const finalResponse = await axios.get(countryAPI);
+      // //city current weather data
+      // const finalResponse = await axios.get(countryAPI);
+      // weatherSearchResults.value = finalResponse.data;
+      // console.log("tk final Data", finalResponse.data);
 
-      weatherSearchResults.value = finalResponse.data;
-
-      console.log("tk final Data", finalResponse.data);
+      const result = await axios.get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery.value}.json?access_token=${mapboxAPIKey}&types=place`
+      );
+      weatherSearchResults.value = result.data.features;
       return;
     }
     weatherSearchResults.value = null;
