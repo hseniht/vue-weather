@@ -109,7 +109,7 @@
 import axios from "axios";
 import { useRoute } from "vue-router";
 
-const openWeatherAPIKey = "7efa332cf48aeb9d2d391a51027f1a71";
+const openWeatherAPIKey = "aq7efa332cf48aeb9d2d391a51027f1a71";
 const route = useRoute();
 const getWeatherData = async () => {
   try {
