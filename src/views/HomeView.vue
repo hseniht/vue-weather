@@ -35,7 +35,7 @@
       <Suspense>
         <CityList />
         <template #fallback>
-          <p>Loadinng ...</p>
+          <CityCardSkeleton />
         </template>
       </Suspense>
     </div>
@@ -48,6 +48,7 @@ import axios from "axios";
 import { mapboxAPIKey } from "../configs";
 import { useRouter } from "vue-router";
 import CityList from "../components/CityList.vue";
+import CityCardSkeleton from "../components/CityCardSkeleton.vue";
 
 const router = useRouter();
 const previewCity = (searchResult) => {
