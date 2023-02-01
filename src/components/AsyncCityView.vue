@@ -45,7 +45,7 @@
     </div>
     <hr class="border-white border-opacity-10 border w-full" />
     <!-- Hourly Weather -->
-    <!-- Hourly Weather -->
+
     <div class="max-w-screen-md w-full py-12">
       <div class="mx-8 text-white">
         <h2 class="mb-4">Hourly Weather</h2>
@@ -102,12 +102,20 @@
         </div>
       </div>
     </div>
+
+    <div
+      class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500"
+      @click="removeCity"
+    >
+      <i class="fa-solid fa-trash"></i>
+      <p>Remove City</p>
+    </div>
   </div>
 </template>
 
 <script setup>
 import axios from "axios";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { openWeatherAPIKey } from "../configs";
 
 const route = useRoute();
@@ -133,5 +141,14 @@ const getWeatherData = async () => {
   } catch (err) {}
 };
 const weatherData = await getWeatherData();
-console.log(weatherData);
+
+const router = useRouter();
+const removeCity = () => {
+  const cities = JSON.parse(localStorage.getItem("savedCities"));
+  const updatedCities = cities.filter((city) => city.id !== route.query.id);
+  localStorage.setItem("savedCities", JSON.stringify(updatedCities));
+  router.push({
+    name: "home",
+  });
+};
 </script>
