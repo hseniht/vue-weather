@@ -50,6 +50,10 @@ import { useRouter } from "vue-router";
 import CityList from "../components/CityList.vue";
 import CityCardSkeleton from "../components/CityCardSkeleton.vue";
 
+console.log("tk process. env")
+
+console.log(process.env.MAPBOX_API)
+
 const router = useRouter();
 const previewCity = (searchResult) => {
   const [city, state] = searchResult.place_name.split(",");
