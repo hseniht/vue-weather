@@ -50,7 +50,10 @@ import { useRouter } from "vue-router";
 import CityList from "../components/CityList.vue";
 import CityCardSkeleton from "../components/CityCardSkeleton.vue";
 
-console.log("tk test");
+console.log("tk test2");
+console.log("tk test using meta");
+console.log("tk test meta",import.meta.env);
+console.log("tk test meta2",import.meta.env.MAPBOX_API_KEY);
 console.log("tk process", process);
 console.log("tk process.env", process.env);
 
