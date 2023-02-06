@@ -50,9 +50,11 @@ import { useRouter } from "vue-router";
 import CityList from "../components/CityList.vue";
 import CityCardSkeleton from "../components/CityCardSkeleton.vue";
 
-console.log("tk process. env")
+console.log("tk test");
+console.log("tk process", process);
+console.log("tk process.env", process.env);
 
-console.log(process.env.MAPBOX_API)
+console.log(process.env.MAPBOX_API);
 
 const router = useRouter();
 const previewCity = (searchResult) => {
