@@ -52,12 +52,20 @@ import CityCardSkeleton from "../components/CityCardSkeleton.vue";
 
 console.log("tk test2");
 console.log("tk test using meta");
-console.log("tk test meta",import.meta.env);
-console.log("tk test meta2",import.meta.env.MAPBOX_API_KEY);
-console.log("tk process", process);
-console.log("tk process.env", process.env);
+console.log("tk test meta", import.meta.env);
+console.log("tk test meta2", import.meta.env.MAPBOX_API_KEY);
+// console.log("tk process", process);
+// console.log("tk process.env", process.env);
 
-console.log(process.env.MAPBOX_API);
+// console.log(process.env.MAPBOX_API);
+
+const fetchData = async () => {
+  console.log("tk fetchData1");
+  const result = await axios.get(".netlify/functions/fetchWeather");
+  console.log("tk fetchData2", result);
+};
+
+fetchData();
 
 const router = useRouter();
 const previewCity = (searchResult) => {
