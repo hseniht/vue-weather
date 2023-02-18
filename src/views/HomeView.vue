@@ -60,9 +60,9 @@ console.log("tk test meta2", import.meta.env.MAPBOX_API_KEY);
 // console.log(process.env.MAPBOX_API);
 
 const fetchData = async () => {
-  console.log("tk fetchData1");
+  console.log("tk fetchData start");
   const result = await axios.get(".netlify/functions/fetchWeather");
-  console.log("tk fetchData2", result);
+  console.log("tk fetchData done", result);
 };
 
 fetchData();

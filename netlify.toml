@@ -1,4 +1,4 @@
 [build]
 functions = "functions/"
 # publish = "build"
-publish = "src"
+# publish = "src"
