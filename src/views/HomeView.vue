@@ -54,8 +54,6 @@ console.log("tk test2");
 console.log("tk test using meta");
 console.log("tk test meta", import.meta.env);
 console.log("tk test meta2", import.meta.env.MAPBOX_API_KEY);
-console.log("tk process", process);
-console.log("tk process.env", process.env);
 
 // console.log(process.env.MAPBOX_API);
 
