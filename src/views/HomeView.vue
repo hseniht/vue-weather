@@ -45,25 +45,10 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
-import { mapboxAPIKey } from "../configs";
 import { useRouter } from "vue-router";
 import CityList from "../components/CityList.vue";
 import CityCardSkeleton from "../components/CityCardSkeleton.vue";
 
-console.log("tk test2");
-console.log("tk test using meta");
-console.log("tk test meta", import.meta.env);
-console.log("tk test meta2", import.meta.env.MAPBOX_API_KEY);
-
-// console.log(process.env.MAPBOX_API);
-
-const fetchData = async () => {
-  console.log("tk fetchData start");
-  const result = await axios.get(".netlify/functions/fetchWeather");
-  console.log("tk fetchData done", result);
-};
-
-fetchData();
 
 const router = useRouter();
 const previewCity = (searchResult) => {
@@ -91,10 +76,8 @@ const getSearchResults = () => {
   queryTimeout.value = setTimeout(async () => {
     if (searchQuery.value !== "") {
       try {
-        const result = await axios.get(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery.value}.json?access_token=${mapboxAPIKey}&types=place`
-        );
-        mapboxSearchResults.value = result.data.features;
+        const { data } = await axios.get(`.netlify/functions/fetchWeather?search=${searchQuery.value}`);
+        mapboxSearchResults.value = data.response.features;
       } catch {
         searchError.value = true;
       }
